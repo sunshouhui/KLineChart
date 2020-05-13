@@ -128,7 +128,7 @@ export default class CandleStickFloatLayerView extends TechnicalIndicatorFloatLa
     }
 
     const rectWidth = rectBorderSize * 2 + maxLabelWidth + rectPaddingLeft + rectPaddingRight
-    const rectX;
+    let rectX
     if (!window.rectKlineChartAlert) {
       window.rectKlineChartAlert = rectLeft
     }
