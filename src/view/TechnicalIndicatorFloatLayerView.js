@@ -152,11 +152,11 @@ export default class TechnicalIndicatorFloatLayerView extends View {
    */
   _drawTechnicalIndicatorPromptText (data, colors, offsetTop) {
     const floatLayerPromptTechnicalIndicatorText = this._chartData.styleOptions().floatLayer.prompt.technicalIndicator.text
-    const nameText = data.name
+    // const nameText = data.name
     const labels = data.labels
     const values = data.values
     const textMarginLeft = floatLayerPromptTechnicalIndicatorText.marginLeft
-    const textMarginRight = floatLayerPromptTechnicalIndicatorText.marginRight
+    // const textMarginRight = floatLayerPromptTechnicalIndicatorText.marginRight
     let labelX = textMarginLeft
     const labelY = floatLayerPromptTechnicalIndicatorText.marginTop + offsetTop
     const textSize = floatLayerPromptTechnicalIndicatorText.size
@@ -164,17 +164,20 @@ export default class TechnicalIndicatorFloatLayerView extends View {
     const colorSize = colors.length
     this._ctx.textBaseline = 'top'
     this._ctx.font = getFont(textSize, floatLayerPromptTechnicalIndicatorText.family)
-    const nameTextWidth = calcTextWidth(this._ctx, nameText)
+    // const nameTextWidth = calcTextWidth(this._ctx, nameText)
     this._ctx.fillStyle = textColor
-    this._ctx.fillText(nameText, labelX, labelY)
-    labelX += (textMarginLeft + nameTextWidth)
+    // 适配H5端，宽度
+    // this._ctx.fillText(nameText, labelX, labelY)
+    // labelX += (textMarginLeft + nameTextWidth)
     const isVol = this._additionalDataProvider.technicalIndicatorType() === TechnicalIndicatorType.VOL
     for (let i = 0; i < labels.length; i++) {
       const text = `${labels[i].toUpperCase()}: ${(isVol ? formatBigNumber(values[i]) : values[i]) || '--'}`
       const textWidth = calcTextWidth(this._ctx, text)
       this._ctx.fillStyle = colors[i % colorSize] || textColor
       this._ctx.fillText(text, labelX, labelY)
-      labelX += (textMarginLeft + textMarginRight + textWidth)
+      labelX += 5 + textWidth
+      // 适配H5端，宽度
+      // labelX += (textMarginLeft + textMarginRight + textWidth)
     }
   }
 
